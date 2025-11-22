@@ -1,0 +1,11 @@
+cff-version: 1.2.0
+message: "If you use this dataset, please cite it as below."
+title: "Occurrence dataset of Scarabaeoidea in the Abruzzo, Lazio and Molise National Park (PNALM)"
+version: "0.1.0"
+date-released: "2025-11-22"
+authors:
+  - family-names: "Ragazzini"
+    given-names: "Mattia"
+    orcid: "https://orcid.org/0009-0004-3636-7397"  # sostituisci con il tuo ORCID reale se ce l'hai
+repository-code: "https://github.com/USER/pnalm-scarabaeoidea-occurrences"
+type: dataset
