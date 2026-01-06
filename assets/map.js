@@ -8,8 +8,8 @@ const SPECIES = params.get("species"); // scientificName
 // PERCORSI DATI
 // =====================================================
 const CSV_URL = "../data/geom_occurances_valfondillo_georeferenced.csv";
-const CORE_GEOJSON = "../boundaries/pnalm_core.geojson";
-const OUTER_GEOJSON = "../boundaries/pnalm_outer.geojson";
+const CORE_GEOJSON = "../boundaries/PNALM_core.geojson";
+const OUTER_GEOJSON = "../boundaries/PNALM_outer.geojson";
 
 // =====================================================
 // INIZIALIZZA MAPPA
