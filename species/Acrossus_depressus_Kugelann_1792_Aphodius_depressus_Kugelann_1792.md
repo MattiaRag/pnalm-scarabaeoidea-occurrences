@@ -10,6 +10,7 @@ title: Acrossus depressus (Kugelann, 1792)
 <iframe
   src="../assets/map.html?species=Acrossus%20depressus"
   width="100%"
-  height="650"
+  height="700"
   style="border:0;">
 </iframe>
+</div>
