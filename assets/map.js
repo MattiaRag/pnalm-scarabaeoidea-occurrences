@@ -6,7 +6,7 @@ const SPECIES = params.get("species"); // es: "Acrossus depressus"
 
 const CSV_URL = "../data/geom_occurances_valfondillo_georeferenced.csv";
 const CORE_GEOJSON = "../boundaries/PNALM_core.geojson";
-const OUTER_GEOJSON = "../boundaries/PNALM_outer.geojson";
+const OUTER_GEOJSON = "../boundaries/PNALM_externalarea.geojson";
 
 // ===============================
 // MAP
