@@ -1,31 +1,8 @@
----
-title: Acrossus depressus (Kugelann, 1792)
----
-
-## Acrossus depressus (Kugelann, 1792)
-
-### Occurrence map
-
-<div id="map-container" style="border:1px solid #aaa; padding:6px; margin-bottom:20px;">
-  <div id="map" style="height:500px;"></div>
-</div>
-
-### Occurrence records
-
-<div id="occurrence-table"></div>
-
-<!-- LIBRARIES -->
-<link
-  rel="stylesheet"
-  href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/papaparse@5.4.1/papaparse.min.js"></script>
-
-<!-- SCRIPT SPECIE -->
 <script>
-const SPECIES_NAME = "Acrossus depressus (Kugelann, 1792) (= Aphodius depressus (Kugelann, 1792))";
+const SPECIES_PREFIX = "Acrossus depressus";
 const CSV_URL = "../data/geom_occurances_valfondillo_georeferenced.csv";
+const CORE_GEOJSON = "../boundaries/PNALM_core.geojson";
+const OUTER_GEOJSON = "../boundaries/PNALM_outer.geojson";
 
 // ---------------- MAP ----------------
 const map = L.map("map").setView([41.9, 13.8], 10);
@@ -34,27 +11,54 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
   attribution: "© OpenStreetMap contributors"
 }).addTo(map);
 
+// ---------------- BOUNDARIES ----------------
+fetch(OUTER_GEOJSON)
+  .then(r => r.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: { color: "#1f78b4", weight: 2, fillOpacity: 0.15 }
+    }).addTo(map);
+  });
+
+fetch(CORE_GEOJSON)
+  .then(r => r.json())
+  .then(data => {
+    L.geoJSON(data, {
+      style: { color: "#006400", weight: 2, fillOpacity: 0.3 }
+    }).addTo(map);
+  });
+
+// ---------------- CSV ----------------
 Papa.parse(CSV_URL, {
   download: true,
   header: true,
   skipEmptyLines: true,
+
   complete: function(results) {
 
-    const rows = results.data.filter(
-      r => r.scientificName === SPECIES_NAME
+    const rows = results.data.filter(r =>
+      r.scientificName &&
+      r.scientificName.startsWith(SPECIES_PREFIX)
     );
+
+    console.log("Records found:", rows.length);
+
+    if (rows.length === 0) {
+      document.getElementById("occurrence-table").innerHTML =
+        "<p><strong>No records found for this species.</strong></p>";
+      return;
+    }
 
     const bounds = [];
 
     rows.forEach(r => {
       const lat = r["decimalLatitude.y"];
       const lon = r["decimalLongitude.y"];
-
       if (!lat || !lon) return;
 
-      const marker = L.circleMarker([lat, lon], {
+      L.circleMarker([lat, lon], {
         radius: 5,
-        color: "#1a9850",
+        color: "#e31a1c",
         fillOpacity: 0.8
       }).addTo(map);
 
@@ -82,7 +86,6 @@ Papa.parse(CSV_URL, {
     });
 
     html += "</tbody></table>";
-
     document.getElementById("occurrence-table").innerHTML = html;
   }
 });
