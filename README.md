@@ -12,3 +12,9 @@ Each record has:
 - georeferencing fields including `decimalLatitude`, `decimalLongitude`,
   `coordinateUncertaintyInMeters` and `footprintWKT` where available;
 - a per-record `license` field indicating the applicable data license.
+
+## Collection context
+
+This dataset is part of:
+
+https://github.com/MattiaRag/pnalm-INSECTbiodiversity-datasets
